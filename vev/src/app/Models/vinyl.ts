@@ -8,4 +8,5 @@ export interface Vinyl {
   coverImg?: string;
   genre: string;
   recommendedWineIds?: number[];
+  isInWishlist?: boolean;
 }

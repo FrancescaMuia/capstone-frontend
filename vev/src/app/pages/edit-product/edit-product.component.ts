@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/* import { Component } from '@angular/core';
 import { ProductsService } from '../../products.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { iProduct } from '../../Models/iproduct';
@@ -48,3 +48,4 @@ export class EditProductComponent {
   }
 
 }
+ */

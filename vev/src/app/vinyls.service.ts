@@ -23,4 +23,10 @@ export class VinylService {
     const url = `${this.vinylsUrl}/${id}`;
     return this.http.get<Vinyl>(url);
   }
+
+  /* getTrackById(trackId: number): Observable<Track> {
+    const url = `${this.vinylsUrl}/tracks/${trackId}`;
+    return this.http.get<Track>(url);
+  } */
+
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ElementRef, HostListener } from '@angular/core';
+/* import { Component, EventEmitter, Input, Output, ElementRef, HostListener } from '@angular/core';
 import { iProduct } from '../../../Models/iproduct';
 
 @Component({
@@ -32,3 +32,4 @@ export class ProductDetailComponent {
     }
   }
 }
+ */

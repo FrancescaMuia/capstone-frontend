@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+/* import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { iProduct } from './Models/iproduct';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of, tap } from 'rxjs';
@@ -9,7 +9,7 @@ import { environment } from '../environments/environment.development';
 })
 export class ProductsService {
 
-  private productsUrl = environment.productsUrl;
+  //private productsUrl = environment.productsUrl;
   private productsCache: iProduct[] = [];
   private productsSubject = new BehaviorSubject<iProduct[]>([]);
   public products$ = this.productsSubject.asObservable();
@@ -109,3 +109,4 @@ export class ProductsService {
   }
 
 }
+ */

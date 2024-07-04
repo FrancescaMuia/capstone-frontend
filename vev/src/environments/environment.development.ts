@@ -3,5 +3,5 @@ export const environment = {
   loginUrl : 'http://localhost:8080/api/users/login',
   usersUrl :  'http://localhost:8080/api/users',
   vinylsUrl : 'http://localhost:8080/api/vinyl',
-   productsUrl : 'http://localhost:8080/api/product'
+  // productsUrl : 'http://localhost:8080/api/product'
 };

@@ -25,7 +25,7 @@ body{
     background-image: url(./assets/geometric-seamless-pattern.jpg);
     background-size: cover;
     background-attachment: fixed;
-  
+    font-family: 'ObjectSans', sans-serif;
   }
 
   body::before {
@@ -40,3 +40,14 @@ body{
     pointer-events: none;
   }
 
+  h3 {
+    font-family: 'ObjectSans', sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  .title-bold{
+    font-family: 'ObjectSans', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+  }

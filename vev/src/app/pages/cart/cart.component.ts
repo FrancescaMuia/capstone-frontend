@@ -1,4 +1,4 @@
-import { ProductsService } from './../../products.service';
+/* import { ProductsService } from './../../products.service';
 import { Component, HostListener, TemplateRef, inject } from '@angular/core';
 import { iProduct } from '../../Models/iproduct';
 import { AuthService } from '../../auth/auth.service';
@@ -152,3 +152,4 @@ removeFromCart(productId: number): void {
     }
   }
 }
+ */

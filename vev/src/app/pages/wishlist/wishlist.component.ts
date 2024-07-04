@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/* import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { ProductsService } from '../../products.service';
 import { iProduct } from '../../Models/iproduct';
@@ -86,3 +86,4 @@ export class WishlistComponent {
 
 
 }
+ */
