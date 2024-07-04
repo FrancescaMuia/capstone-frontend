@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+@import 'colors';
+
+@font-face {
+  font-family: 'ObjectSans';
+  src: url('../src/assets/fonts/ObjectSans-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ObjectSans';
+  src: url('../src/assets/fonts/ObjectSans-Heavy.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+body{
+    background-color: #0F101C;
+    background-image: url(./assets/geometric-seamless-pattern.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+  
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    pointer-events: none;
+  }
+
