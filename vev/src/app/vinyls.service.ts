@@ -70,4 +70,16 @@ export class VinylService {
   }
 
 
+  
+
+  updateVinylWithImage(id: number, vinyl: Vinyl, file: File): Observable<any> {
+    const url = `${this.vinylsUrl}/${id}/productImg`;
+    const formData: FormData = new FormData();
+    formData.append('vinyl', new Blob([JSON.stringify(vinyl)], { type: 'application/json' }));
+    formData.append('coverImg', file, file.name);
+
+    // Utilizzo di PATCH
+    return this.http.patch(url, formData);
+  }
+
 }

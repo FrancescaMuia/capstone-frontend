@@ -26,6 +26,18 @@ export class EditVinylComponent implements OnInit {
     this.getVinyl();
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewUrl = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
   getVinyl(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.vinylService.getVinylById(id).subscribe({
@@ -40,20 +52,31 @@ export class EditVinylComponent implements OnInit {
 
   saveVinyl(): void {
     if (this.vinyl && this.vinyl.id) { // Assicurati che vinyl e vinyl.id siano definiti
-      this.vinylService.updateVinyl(this.vinyl.id, this.vinyl).subscribe(() => {
-        console.log('Vinile aggiornato con successo');
-        this.router.navigate(['/products']);
-      }, (error: HttpErrorResponse) => {
-        console.error('Errore durante l\'aggiornamento del vinile:', error);
-      });
+      if (this.selectedFile) {
+        this.vinylService.updateVinylWithImage(this.vinyl.id, this.vinyl, this.selectedFile).subscribe(
+          () => {
+            console.log('Vinile e immagine aggiornati con successo');
+            this.router.navigate(['/products']);
+          },
+          (error: HttpErrorResponse) => {
+            console.error('Errore durante l\'aggiornamento del vinile e dell\'immagine:', error);
+          }
+        );
+      } else {
+        this.vinylService.updateVinyl(this.vinyl.id, this.vinyl).subscribe(
+          () => {
+            console.log('Vinile aggiornato con successo');
+            this.router.navigate(['/products']);
+          },
+          (error: HttpErrorResponse) => {
+            console.error('Errore durante l\'aggiornamento del vinile:', error);
+          }
+        );
+      }
     } else {
       console.error('ID del vinile non definito o vinile non valido.');
     }
   }
-
-    
-    
-  
 
   deleteVinyl(vinylId: number): void {
     if (confirm("Sei sicuro di voler eliminare questo vinile?")) {
@@ -68,21 +91,4 @@ export class EditVinylComponent implements OnInit {
       });
     }
   }
-
-
-onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-
-    if (this.selectedFile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.previewUrl = reader.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
-    }
-  }
-
-
-  
 }
-
