@@ -1,7 +1,11 @@
 <div class="container">
+  <div class="presentation">
+    <div class="overlay">
+      <h2 class="slogan">Benvenuti nel mondo dei Vinili!</h2>
+    </div>
+  </div>
   <div class="header">
-    <h1 class="title-bold">Lista di Vinili</h1>
-    <input class="searchbar" type="text" placeholder="Cerca..." (input)="showSearch($event)" />
+    <h1 class="title-bold">I nostri Vinili</h1>
   </div>
   
   <div class="alert" *ngIf="showAlert">
@@ -46,6 +50,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="text-center mt-4">
+    <button class="btn btn-primary" [routerLink]="['/products']">Vai alla pagina dei prodotti</button>
   </div>
 </div>
 

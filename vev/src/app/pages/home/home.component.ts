@@ -120,28 +120,6 @@ export class HomeComponent {
   }
   
 
-  /* getArtists(vinyl: Vinyl): string {
-    const artists: string[] = [];
-
-    // Map trackIds to observables of tracks
-    const trackObservables = vinyl.trackIds.map(trackId => this.vinylSvc.getTrackById(trackId));
-
-    // Combine all track observables into one observable
-    combineLatest(trackObservables).subscribe(tracks => {
-      tracks.forEach(track => {
-        track.artists.forEach(artist => {
-          artists.push(artist.name);
-        });
-      });
-    });
-
-    const uniqueArtists = Array.from(new Set(artists));
-    return uniqueArtists.join(', ');
-  } */
-
-  
-
-
   showSearch(event: any): void {
     const searchTerm = event?.target.value.trim().toLowerCase();
     if (searchTerm !== '') {

@@ -1,0 +1,182 @@
+@import '../../../colors';
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header input {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.alert {
+  background-color: #ffcc00;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.searchbar {
+  border-radius: 0.75rem;
+  border: 1px solid #ccc; 
+  outline: none;
+  font-family: ObjectSans;
+  font-weight: normal;
+}
+
+.vinyl-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: $background-color;
+  border-radius: .75rem;
+  height: 100%;
+}
+
+.vinyl-item .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vinyl-item button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: $primary-color;
+}
+
+
+.vinyl-item img {
+  max-width: 50%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.icon-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.icon-buttons button:hover {
+  color: $tertiary-color;
+}
+
+.title-bold{
+  color: $background-color;
+}
+
+.vinyl-title{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+//MODALE
+
+.modal {
+  display: none; /* Modale inizialmente nascosta */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Sfondo semi-trasparente */
+}
+
+.modal.show {
+  display: block; /* Mostra la modale quando showModal è true */
+}
+
+.modal-dialog {
+  position: relative;
+  margin: 10% auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+.modal-content {
+  background-color: $background-color;
+  margin: auto;
+  padding: 20px;
+  border-radius: .75rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 10px;
+  padding-top: 0;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  text-align: left;
+}
+
+.modal-body img {
+  max-width: 10%;
+  height: auto;
+}
+
+.custom-close-button {
+  border: none; /* Rimuove il bordo */
+  background-color: transparent; /* Rimuove il colore di sfondo */
+  padding: 0; /* Rimuove lo spazio interno */
+}
+
+.custom-close-button span {
+  font-size: 2.5rem; /* Imposta la dimensione dell'icona di chiusura */
+  color: #000; /* Imposta il colore dell'icona */
+}
+
+.custom-close-button:hover span {
+  color: #555; /* Cambia il colore dell'icona quando il pulsante è in hover */
+}
+
+.custom-dropdown{
+  background-color: $primary-color;
+  border-radius: .75rem;
+}
+
+.add-vinyl {
+  font-size: 2rem; /* Dimensione dell'icona */
+  color: #007bff; /* Colore dell'icona */
+  cursor: pointer; /* Cambia il cursore quando si passa sopra */
+}
+
+.add-vinyl:hover {
+  color: #0056b3; /* Cambia colore quando si passa sopra */
+}

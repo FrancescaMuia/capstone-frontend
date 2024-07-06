@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="header">
+      <h1 class="title-bold">Lista di Vinili</h1>
+      <input class="searchbar" type="text" placeholder="Cerca..." (input)="showSearch($event)" />
+    </div>
+    
+    <div class="alert" *ngIf="showAlert">
+      {{ alertMessage }}
+    </div>
+
+    <div>
+        <i *ngIf="isAdmin" routerLink="/add-vinyl" role="button" title="Aggiungi un vinile" class="add-vinyl mb-2 ">Aggiungi vinile</i>
+    </div>
+  
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 vinyls-container">
+      <div *ngFor="let vinyl of vinyls" class="col">
+        <div class="card vinyl-item" (click)="openModal(vinyl)">
+          <div class="card-body">
+            <h5 class="card-title">{{ vinyl.name }}</h5>
+          </div>
+          <img [src]="vinyl.coverImg" class="card-img-top" alt="{{ vinyl.name }} cover image">
+          <div class="card-body">
+            <p class="card-text">{{ vinyl.year }}</p>
+            <!-- <p class="card-text">{{ getArtists(vinyl) }}</p> -->
+            <div class="d-flex justify-content-between align-items-center icon-buttons">
+              <button (click)="addToCart(vinyl)" class="btn btn-primary">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+              <button (click)="toggleWishlist(vinyl)" class="btn btn-danger">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" [class.show]="showModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close custom-close-button" aria-label="Close" (click)="closeModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <h5 class="modal-title">{{ selectedVinyl?.name }}</h5>
+                    <img class="img-fluid" [src]="selectedVinyl?.coverImg" alt="Vinyl Cover">
+                  </div>
+                  <div class="dropdown" *ngIf="selectedVinyl && selectedVinyl.recommendedWines && selectedVinyl.recommendedWines.length > 0">
+
+                    <button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" id="recommendedDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Vini consigliati
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="recommendedDropdown">
+                      <a class="dropdown-item" *ngFor="let wine of getRecommendedWines()" (click)="selectRecommended(wine)">
+                        {{ wine.name }}
+                      </a>                      
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary mt-3" [disabled]="!selectedRecommended" (click)="purchaseWine()">Acquista</button>
+              </div>
+          </div>
+        </div>
+    </div>
+    
+</div>
+  
+  
+  

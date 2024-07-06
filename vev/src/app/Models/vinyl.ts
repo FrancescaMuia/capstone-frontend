@@ -1,3 +1,5 @@
+import { SimpleWine } from "./simplewine";
+
 export interface Vinyl {
     id?: number;
   name: string;
@@ -7,6 +9,12 @@ export interface Vinyl {
   trackIds: number[];
   coverImg?: string;
   genre: string;
-  recommendedWineIds?: number[];
+  recommendedWines: SimpleWine[];
   isInWishlist?: boolean;
 }
+
+/* interface iwine {
+  id: number;
+  variety: string;
+}
+ */

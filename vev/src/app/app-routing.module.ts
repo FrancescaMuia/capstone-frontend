@@ -5,6 +5,8 @@ import { GuestGuard } from './auth/guest.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
+import { ProductsComponent } from './pages/products/products.component';
+import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
 //import { EditProductComponent } from './pages/edit-product/edit-product.component';
 //import { AddProductComponent } from './pages/add-product/add-product.component';
 //import { CartComponent } from './pages/cart/cart.component';
@@ -27,6 +29,16 @@ const routes: Routes = [
     path:'home',
     component:HomeComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-vinyl',
+    component: AddVinylComponent,
+    canActivate: [AuthGuard, AdminGuard]
   },
   /* {
     path:'edit-product/:id',

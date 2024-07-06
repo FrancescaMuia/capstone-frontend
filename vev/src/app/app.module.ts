@@ -15,6 +15,8 @@ import { FooterComponent } from './pages/footer/footer.component';
 //import { CartComponent } from './pages/cart/cart.component';
 //import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { ErrorInterceptor } from './interceptors/auth.interceptor';
+import { ProductsComponent } from './pages/products/products.component';
+import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
 
 
 
@@ -30,7 +32,9 @@ import { ErrorInterceptor } from './interceptors/auth.interceptor';
     //EditProductComponent,
     //CartComponent,
     //WishlistComponent,
-    FooterComponent
+    FooterComponent,
+    ProductsComponent,
+    AddVinylComponent
     
     
   ],

@@ -6,6 +6,32 @@
   padding: 20px;
 }
 
+.presentation {
+  position: relative;
+  //background-image: url('../../../assets/');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .75rem;
+  margin-bottom: 20px;
+}
+
+.presentation .overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: .75rem;
+}
+
+.slogan {
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  font-family: ObjectSans;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -34,16 +60,16 @@
   font-weight: normal;
 }
 
-.vinyls-container {
+/* .vinyls-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-}
+} */
 
 .vinyl-item {
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: .75rem;
   //width: calc(33.333% - 20px);
   box-sizing: border-box;
   display: flex;
@@ -52,6 +78,14 @@
   text-align: center;
   background-color: $background-color;
   border-radius: .75rem;
+  height: 100%;
+}
+
+.vinyl-item .card-body {
+  flex: 1; /* Aggiunto per distribuire lo spazio disponibile */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .vinyl-item button {
