@@ -17,6 +17,9 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { ErrorInterceptor } from './interceptors/auth.interceptor';
 import { ProductsComponent } from './pages/products/products.component';
 import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
+import { AddWineComponent } from './pages/add-wine/add-wine.component';
+import { WineListComponent } from './pages/winelist/winelist.component';
+import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
 
 
 
@@ -34,7 +37,10 @@ import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
     //WishlistComponent,
     FooterComponent,
     ProductsComponent,
-    AddVinylComponent
+    AddVinylComponent,
+    AddWineComponent,
+    WineListComponent,
+    EditVinylComponent
     
     
   ],

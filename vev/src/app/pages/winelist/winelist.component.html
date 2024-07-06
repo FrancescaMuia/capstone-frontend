@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="header">
+      <h1 class="title-bold">Lista di Vini</h1>
+      <input class="searchbar" type="text" placeholder="Cerca..." (input)="showSearch($event)" />
+    </div>
+  
+    <div class="alert" *ngIf="showAlert">
+      {{ alertMessage }}
+    </div>
+  
+    <div>
+      <i *ngIf="isAdmin" routerLink="/add-wine" role="button" title="Aggiungi un vino" class="add-wine mb-2">Aggiungi vino</i>
+    </div>
+  
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 wines-container">
+      <div *ngFor="let wine of wines" class="col">
+        <div class="card wine-item" (click)="openModal(wine)">
+          <div class="card-body">
+            <h5 class="card-title">{{ wine.variety }}</h5>
+            <p class="card-text">{{ wine.producer }}</p>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ wine.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  

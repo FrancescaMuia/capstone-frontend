@@ -1,7 +1,9 @@
-<div class="text-white col-10 col-md-8 col-lg-6 mx-auto">
-    <h1 class="mt-5 mb-2">Aggiungi Nuovo Vinile</h1>
+<div *ngIf="vinyl" class="text-white col-10 col-md-8 col-lg-6 mx-auto">
+    <h1 class="mt-5 mb-2">Modifica Vinile</h1>
   
-    <form class="d-flex flex-column gap-3" (ngSubmit)="saveVinyl()">
+    <h4 class="mb-4">#ID {{vinyl.id}}</h4>
+  
+    <form class="d-flex flex-column gap-3 mb-5" (ngSubmit)="saveVinyl()">
   
       <div class="form-group">
         <label for="name" class="mb-2">Nome</label>
@@ -23,17 +25,32 @@
         <input [(ngModel)]="vinyl.year" name="year" type="number" id="year" required class="form-control">
       </div>
   
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="coverImg" class="mb-2">Immagine di Copertina</label>
         <input [(ngModel)]="vinyl.coverImg" name="coverImg" id="coverImg" required class="form-control">
+      </div> -->
+      <!-- <div class="form-group">
+        <label for="coverImg" class="mb-2">Immagine di Copertina</label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="form-control" id="coverImg">
+      </div>
+      
+      <input type="hidden" [(ngModel)]="vinyl.coverImg" name="coverImg" id="coverImg"> -->
+      <div class="form-group">
+        <label for="posterImg">Poster</label>
+        <input type="file" id="posterImg" (change)="onFileSelected($event)" class="form-control">
+      </div>
+      <div *ngIf="previewUrl">
+        <img [src]="previewUrl" alt="Movie Poster Preview" style="max-width: 100%;">
       </div>
   
       <div class="form-group">
         <label for="genre" class="mb-2">Genere</label>
         <input [(ngModel)]="vinyl.genre" name="genre" id="genre" required class="form-control">
       </div>
+  
+      <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+      <button type="button" class="btn btn-danger" (click)="vinyl.id !== undefined && deleteVinyl(vinyl.id)">Elimina Vinile</button>
 
-      <button type="submit" class="btn btn-primary">Aggiungi Vinile</button>
     </form>
   </div>
   

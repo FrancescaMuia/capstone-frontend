@@ -1,10 +1,9 @@
-/* import { ProductsService } from './../../products.service';
-import { Component, HostListener, TemplateRef, inject } from '@angular/core';
-import { iProduct } from '../../Models/iproduct';
+/* import { Component, HostListener, TemplateRef, inject } from '@angular/core';
+import { Vinyl } from '../../Models/vinyl';
 import { AuthService } from '../../auth/auth.service';
+import { VinylService } from '../../vinyls.service'; // Assicurati di importare il servizio corretto per i vinili
 
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
-import { CouponsService } from '../../coupons.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,29 +12,23 @@ import { CouponsService } from '../../coupons.service';
 })
 export class CartComponent {
 
-  products: iProduct[] = [];
-  currentUserCartProducts: iProduct[] = [];
-  productCount: { [productId: number]: number } = {};
-  totalCartPrice: number = 0;
-  discountedPrice: number = 0;
-  showAlert:boolean = false
+  vinyls: Vinyl[] = []; // Array di vinili nel carrello
+  currentUserCartVinyls: Vinyl[] = []; // Vinili nel carrello dell'utente corrente
+  vinylCount: { [vinylId: number]: number } = {}; // Contatore per ciascun vinile nel carrello
+  totalCartPrice: number = 0; // Prezzo totale del carrello
+  showAlert: boolean = false; // Flag per mostrare l'alert di acquisto effettuato
 
-  couponCode: string = '';
-  couponApplied: boolean = false
-
-  errorMessage: string = '';
-
-  scrolled:boolean = false;
+  scrolled: boolean = false;
 
   private offcanvasService = inject(NgbOffcanvas);
 
-  constructor(private authSvc: AuthService, private productsSVC: ProductsService, private couponsSvc: CouponsService) { }
+  constructor(private authSvc: AuthService, private vinylSvc: VinylService) { }
 
   ngOnInit(): void {
     this.loadCart();
   }
 
-  addToCart(product: iProduct): void {
+  addToCart(vinyl: Vinyl): void {
     console.log('Aggiunta al carrello in corso...');
     const userId = this.authSvc.getCurrentUserId();
     if (!userId) {
@@ -43,85 +36,78 @@ export class CartComponent {
       return;
     }
 
-    this.authSvc.addCart(userId, product.id).subscribe({
+    if (vinyl.id !== undefined) { 
+    this.authSvc.addCart(userId, vinyl.id).subscribe({
       next: () => {
-        console.log('Prodotto aggiunto al carrello con successo!');
+        console.log('Vinile aggiunto al carrello con successo!');
         this.updateTotalCartPrice();
       },
       error: (error) => {
         console.error('Errore nell\'aggiungere al carrello', error);
       }
     });
+  } else {
+    console.error('Vinyl.id è undefined, non posso aggiungere al carrello.');
+  }
   }
 
   loadCart(): void {
     this.authSvc.user$.subscribe(user => {
       if (user && user.cart && user.cart.length > 0) {
-        const productCount: { [productId: number]: number } = {};
-        user.cart.forEach((productId) => {
-          productCount[productId] = (productCount[productId] || 0) + 1;
+        const vinylCount: { [vinylId: number]: number } = {};
+        user.cart.forEach((vinylId) => {
+          vinylCount[vinylId] = (vinylCount[vinylId] || 0) + 1;
         });
-        this.productsSVC.getCart(user.cart).subscribe(products => {
-          this.currentUserCartProducts = products;
-          this.currentUserCartProducts.forEach(product => {
-            product.isInCart = (productCount[product.id] || 0) >= 2;
+        this.vinylSvc.getCart(user.cart).subscribe(vinyls => {
+          this.currentUserCartVinyls = vinyls;
+          this.currentUserCartVinyls.forEach(vinyl => {
+            vinyl.isInCart = (vinylCount[vinyl.id] || 0) >= 2;
           });
-          this.productCount = productCount;
+          this.vinylCount = vinylCount;
           this.updateTotalCartPrice();
         });
       } else {
-        this.currentUserCartProducts = [];
+        this.currentUserCartVinyls = [];
       }
     });
-}
-
-removeFromCart(productId: number): void {
-  const userId = this.authSvc.getCurrentUserId();
-  if (userId) {
-    if (this.productCount[productId] && this.productCount[productId] > 0) {
-      this.authSvc.deleteCart(userId, productId).subscribe({
-        next: () => {
-          console.log('Prodotto rimosso dal carrello con successo!');
-          this.productCount[productId]--;
-          if (this.productCount[productId] === 0) {
-            this.currentUserCartProducts = this.currentUserCartProducts.filter(p => p.id !== productId);
-          }
-          this.updateTotalCartPrice();
-        },
-        error: (error) => console.error('Errore nella rimozione dal carrello', error)
-      });
-    }
-  } else {
-    console.error('ID utente non valido');
   }
-}
 
-  emptyCart(userId:number):void{
+  removeFromCart(vinylId: number): void {
+    const userId = this.authSvc.getCurrentUserId();
+    if (userId) {
+      if (this.vinylCount[vinylId] && this.vinylCount[vinylId] > 0) {
+        this.authSvc.deleteCart(userId, vinylId).subscribe({
+          next: () => {
+            console.log('Vinile rimosso dal carrello con successo!');
+            this.vinylCount[vinylId]--;
+            if (this.vinylCount[vinylId] === 0) {
+              this.currentUserCartVinyls = this.currentUserCartVinyls.filter(v => v.id !== vinylId);
+            }
+            this.updateTotalCartPrice();
+          },
+          error: (error) => console.error('Errore nella rimozione dal carrello', error)
+        });
+      }
+    } else {
+      console.error('ID utente non valido');
+    }
+  }
+
+  emptyCart(userId: number): void {
     this.authSvc.emptyCart(userId);
   }
 
-
   updateTotalCartPrice(): void {
-    this.totalCartPrice = this.currentUserCartProducts.reduce((total, product) => {
-      return total + (product.price * (this.productCount[product.id] || 1));
+    this.totalCartPrice = this.currentUserCartVinyls.reduce((total, vinyl) => {
+      return total + (vinyl.price * (this.vinylCount[vinyl.id] || 1));
     }, 0);
   }
 
   openEnd(content: TemplateRef<any>) {
-		this.offcanvasService.open(content, { position: 'end' });
-	}
-
-  applyCoupon() {
-    try {
-      this.discountedPrice = this.couponsSvc.Coupon(this.couponCode, this.totalCartPrice);
-      this.couponApplied = true
-      this.errorMessage = '';
-    } catch (error) {
-      this.errorMessage = error instanceof Error ? error.message : 'Errore sconosciuto';
-    }
+    this.offcanvasService.open(content, { position: 'end' });
   }
 
-  checkoutCompleted(){
+  checkoutCompleted() {
     const userId = this.authSvc.getCurrentUserId();
     if (userId) {
       this.authSvc.emptyCart(userId).subscribe({
@@ -142,8 +128,7 @@ removeFromCart(productId: number): void {
     }
   }
 
-
-@HostListener('window:scroll', [])
+  @HostListener('window:scroll', [])
   onWindowScroll() {
     if (window.pageYOffset > 155) {
       this.scrolled = true;

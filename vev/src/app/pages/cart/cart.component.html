@@ -1,37 +1,31 @@
-  <div *ngIf="currentUserCartProducts.length>0; else emptyCart">
-    <h1 class="mt-5 mb-3 text-white">Il tuo carrello</h1>
-    <div [ngClass]="{'scrolled': scrolled}" data-bs-stackable="true" data-bs-toggle="sticky" class="sticky-top d-flex align-items-center justify-content-between mb-3">
-      <h2  class="text-white me-5">Totale Carrello: {{totalCartPrice | currency:'EUR':'symbol'}}</h2>
-      <button (click)="openEnd(content)" class="btn btn-primary me-5">Procedi al checkout</button>
-    </div>
+<div *ngIf="currentUserCartVinyls.length > 0; else emptyCart">
+  <h1 class="mt-5 mb-3 text-white">Il tuo carrello</h1>
+  <div [ngClass]="{'scrolled': scrolled}" data-bs-stackable="true" data-bs-toggle="sticky" class="sticky-top d-flex align-items-center justify-content-between mb-3">
+    <h2 class="text-white me-5">Totale Carrello: {{ totalCartPrice | currency:'EUR':'symbol' }}</h2>
+    <button (click)="openEnd(content)" class="btn btn-primary me-5">Procedi al checkout</button>
+  </div>
 
-    <div  class="shell position-relative" [ngClass]="{'scrolled': scrolled}">
-      <div class="container">
-        <div class="row  row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-          <div class="col" *ngFor="let product of currentUserCartProducts">
-            <div class="wsk-cp-product ">
-              <div class="wsk-cp-img">
-                <img
-                [src]="product.productImg"
-                class="img-responsive"
-                [alt]="product.name"
-                />
+  <div class="shell position-relative" [ngClass]="{'scrolled': scrolled}">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+        <div class="col" *ngFor="let vinyl of currentUserCartVinyls">
+          <div class="wsk-cp-product">
+            <div class="wsk-cp-img">
+              <img [src]="vinyl.vinylImg" class="img-responsive" [alt]="vinyl.name" />
+            </div>
+            <div class="wsk-cp-text">
+              <div class="category">
+                <span>{{ vinyl.genre }}</span>
               </div>
-              <div class="wsk-cp-text">
-                <div class="category">
-                  <span>{{ product.category }}</span>
-                </div>
-                <div class="title-product">
-                  <h3>{{ product.name }}</h3>
-                </div>
-                <div class="wcf-left text-center"><span class="price fs-4">{{ product.price | currency : "EUR" : "symbol" }}</span></div>
-                <div class="card-footer pt-2 d-flex align-items-center justify-content-between mx-0">
-                  <p class="mb-0 me-2">Nel carrello: {{ productCount[product.id] || 0 }}</p>
-                  <div class="d-flex align-items-center justify-content-between">
-
-                    <i role="button" (click)="addToCart(product)" class="add-btn text-white fa-solid fa-plus me-2"></i>
-                    <i role="button" (click)="removeFromCart(product.id)" class="remove-btn text-white" [ngClass]="product.isInCart ? 'fa-solid fa-minus' : 'fa-solid fa-xmark'"></i>
-                  </div>
+              <div class="title-product">
+                <h3>{{ vinyl.name }}</h3>
+              </div>
+              <div class="wcf-left text-center"><span class="price fs-4">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</span></div>
+              <div class="card-footer pt-2 d-flex align-items-center justify-content-between mx-0">
+                <p class="mb-0 me-2">Nel carrello: {{ vinylCount[vinyl.id] || 0 }}</p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <i role="button" (click)="addToCart(vinyl)" class="add-btn text-white fa-solid fa-plus me-2"></i>
+                  <i role="button" (click)="removeFromCart(vinyl.id)" class="remove-btn text-white" [ngClass]="vinyl.isInCart ? 'fa-solid fa-minus' : 'fa-solid fa-xmark'"></i>
                 </div>
               </div>
             </div>
@@ -40,46 +34,46 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showAlert" class="alert alert-primary position-absolute bottom-50 start-50">Acquisto effettuato con successo!</div>
+</div>
 
-  <ng-template #emptyCart>
-    <h1 class="my-5 text-white">Il tuo carrello è vuoto.</h1>
-  </ng-template>
+<div *ngIf="showAlert" class="alert alert-primary position-absolute bottom-50 start-50">Acquisto effettuato con successo!</div>
 
+<ng-template #emptyCart>
+  <h1 class="my-5 text-white">Il tuo carrello è vuoto.</h1>
+</ng-template>
 
-  <ng-template #content let-offcanvas>
-    <div class="checkout text-white">
-      <div class="offcanvas-header d-flex justify-content-between align-items-center">
-        <h4 class="offcanvas-title">Checkout</h4>
-        <button type="button" class="bg-transparent border border-light text-light rounded-2" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="offcanvas-body">
-        <div *ngFor="let product of currentUserCartProducts">
-          <div class="d-flex justify-content-between">
-            <div class="d-flex ">
-              <p>{{product.name }} </p>
-              <p><i class="ms-1 fa-solid fa-xmark per"></i> {{ productCount[product.id] || 0 }}</p>
-            </div>
-            <p>{{ product.price*productCount[product.id] | currency : "EUR" : "symbol" }}</p>
+<ng-template #content let-offcanvas>
+  <div class="checkout text-white">
+    <div class="offcanvas-header d-flex justify-content-between align-items-center">
+      <h4 class="offcanvas-title">Checkout</h4>
+      <button type="button" class="bg-transparent border border-light text-light rounded-2" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="offcanvas-body">
+      <div *ngFor="let vinyl of currentUserCartVinyls">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <p>{{ vinyl.name }}</p>
+            <p><i class="ms-1 fa-solid fa-xmark per"></i> {{ vinylCount[vinyl.id] || 0 }}</p>
           </div>
-        </div>
-        <hr>
-        <div class="d-flex align-items-center justify-content-between">
-          <input class="px-2 py-1" [(ngModel)]="couponCode" name="coupon" type="text" placeholder="Inserisci codice sconto">
-          <button class="btn btn-success" [disabled]="couponApplied" (click)="applyCoupon()">Applica Coupon</button>
-        </div>
-        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-        <hr>
-        <h4>Totale: <span class="me-4" [ngClass]="couponApplied ? 'text-decoration-line-through' : ''">{{totalCartPrice | currency:'EUR':'symbol'}}</span><span *ngIf="couponApplied">{{discountedPrice | currency:'EUR':'symbol'}}</span></h4>
-        <div class="text-end">
-          <button type="button" class="btn btn-primary mt-2" (click)="offcanvas.close('Close click'); checkoutCompleted() ">Effettua Pagamento</button>
+          <p>{{ vinyl.price * (vinylCount[vinyl.id] || 0) | currency : 'EUR' : 'symbol' }}</p>
         </div>
       </div>
-
+      <hr>
+      <div class="d-flex align-items-center justify-content-between">
+        <input class="px-2 py-1" [(ngModel)]="couponCode" name="coupon" type="text" placeholder="Inserisci codice sconto">
+        <button class="btn btn-success" [disabled]="couponApplied" (click)="applyCoupon()">Applica Coupon</button>
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <hr>
+      <h4>Totale: <span class="me-4" [ngClass]="couponApplied ? 'text-decoration-line-through' : ''">{{ totalCartPrice | currency:'EUR':'symbol' }}</span><span *ngIf="couponApplied">{{ discountedPrice | currency:'EUR':'symbol' }}</span></h4>
+      <div class="text-end">
+        <button type="button" class="btn btn-primary mt-2" (click)="offcanvas.close('Close click'); checkoutCompleted()">Effettua Pagamento</button>
+      </div>
     </div>
-    </ng-template>
+  </div>
+</ng-template>
 
-    <div [ngClass]="{'scrolled': scrolled}" data-bs-stackable="true" data-bs-toggle="sticky" class="fixed-bottom d-flex align-items-center justify-content-between mb-0 px-5 py-3">
-      <h2  class="text-white me-5">Totale Carrello: {{totalCartPrice | currency:'EUR':'symbol'}}</h2>
-      <button (click)="openEnd(content)" class="btn btn-primary">Procedi al checkout</button>
-    </div>
+<div [ngClass]="{'scrolled': scrolled}" data-bs-stackable="true" data-bs-toggle="sticky" class="fixed-bottom d-flex align-items-center justify-content-between mb-0 px-5 py-3">
+  <h2 class="text-white me-5">Totale Carrello: {{ totalCartPrice | currency:'EUR':'symbol' }}</h2>
+  <button (click)="openEnd(content)" class="btn btn-primary">Procedi al checkout</button>
+</div>

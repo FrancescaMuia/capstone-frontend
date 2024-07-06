@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
 import { Vinyl } from './Models/vinyl';
+import { SimpleWine } from './Models/simplewine';
 
 @Injectable({
   providedIn: 'root'
@@ -52,4 +53,21 @@ export class VinylService {
     return this.http.post<string>(`${this.vinylsUrl}/upload-image`, formData);
   }
   
+
+  //prova per caricare su cloudinary
+  /* uploadVinylImage(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'ml_default'); // Sostituisci con il tuo upload preset di Cloudinary
+
+    return this.http.post('https://api.cloudinary.com/v1_1/dtfpc1ez0/image/upload', formData);
+  } */
+
+  uploadPoster(id: number, file: File): Observable<Vinyl> {
+    const formData = new FormData();
+    formData.append('poster', file);
+    return this.http.patch<Vinyl>(`${this.vinylsUrl}/${id}/productImg`, formData);
+  }
+
+
 }

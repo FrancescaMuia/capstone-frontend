@@ -1,9 +1,9 @@
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { VinylService } from '../../vinyls.service';
 import { Vinyl } from '../../Models/vinyl';
 import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-add-vinyl',
@@ -24,6 +24,7 @@ export class AddVinylComponent {
   };
 
   selectedFile: File | null = null;
+ 
 
   constructor(
     private vinylService: VinylService,
@@ -47,6 +48,8 @@ export class AddVinylComponent {
       this.uploadImage(this.selectedFile);
     }
   }
+
+
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];

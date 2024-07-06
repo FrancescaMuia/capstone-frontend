@@ -6,7 +6,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
 import { ProductsComponent } from './pages/products/products.component';
+import { WineListComponent } from './pages/winelist/winelist.component';
 import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
+import { AddWineComponent } from './pages/add-wine/add-wine.component';
+import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
 //import { EditProductComponent } from './pages/edit-product/edit-product.component';
 //import { AddProductComponent } from './pages/add-product/add-product.component';
 //import { CartComponent } from './pages/cart/cart.component';
@@ -36,10 +39,26 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'winelist',
+    component: WineListComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {
+    path: 'edit-vinyl/:id',
+    component: EditVinylComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+  {
     path: 'add-vinyl',
     component: AddVinylComponent,
     canActivate: [AuthGuard, AdminGuard]
   },
+  {
+    path: 'add-wine',
+    component: AddWineComponent,
+    canActivate: [AuthGuard, AdminGuard]
+  },
+ 
   /* {
     path:'edit-product/:id',
     component:EditProductComponent,
