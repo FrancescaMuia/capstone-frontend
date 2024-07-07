@@ -29,7 +29,8 @@
                 <i class="fas fa-shopping-cart"></i>
               </button>
               <button (click)="toggleWishlist(vinyl)" class="btn btn-danger">
-                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart" [ngClass]="{ 'text-danger': vinyl.isInWishlist }"></i>
+  
               </button>
               <i *ngIf="isAdmin" [routerLink]="['/edit-vinyl', vinyl.id]" role="button" title="Modifica un vinile" class="add-vinyl mb-2">Modifica vinile</i>
 
@@ -91,7 +92,7 @@
                 </button>
                 <div ngbDropdownMenu aria-labelledby="recommendedDropdown">
                   <button ngbDropdownItem *ngFor="let wine of getRecommendedWines()" (click)="selectRecommended(wine)">
-                    {{ wine.name }}
+                    {{ wine.name }} - {{ wine.price | currency : "EUR" : "symbol" }}
                   </button>
                 </div>
               </div>

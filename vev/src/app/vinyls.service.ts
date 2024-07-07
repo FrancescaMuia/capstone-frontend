@@ -82,4 +82,8 @@ export class VinylService {
     return this.http.patch(url, formData);
   }
 
+
+  getWishlist(vinylIds: number[]): Observable<Vinyl[]> {
+    return this.http.post<Vinyl[]>(`${this.vinylsUrl}/wishlist`, { vinylIds });
+  }
 }

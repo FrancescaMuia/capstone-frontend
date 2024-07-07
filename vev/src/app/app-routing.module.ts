@@ -13,7 +13,7 @@ import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
 //import { EditProductComponent } from './pages/edit-product/edit-product.component';
 //import { AddProductComponent } from './pages/add-product/add-product.component';
 //import { CartComponent } from './pages/cart/cart.component';
-//import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 
 
 
@@ -58,7 +58,11 @@ const routes: Routes = [
     component: AddWineComponent,
     canActivate: [AuthGuard, AdminGuard]
   },
- 
+  {
+    path:'wishlist',
+    component:WishlistComponent,
+    canActivate: [AuthGuard]
+  },
   /* {
     path:'edit-product/:id',
     component:EditProductComponent,

@@ -13,7 +13,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 //import { AddProductComponent } from './pages/add-product/add-product.component';
 //import { EditProductComponent } from './pages/edit-product/edit-product.component';
 //import { CartComponent } from './pages/cart/cart.component';
-//import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { ErrorInterceptor } from './interceptors/auth.interceptor';
 import { ProductsComponent } from './pages/products/products.component';
 import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
@@ -34,7 +34,7 @@ import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
     //AddProductComponent,
     //EditProductComponent,
     //CartComponent,
-    //WishlistComponent,
+    WishlistComponent,
     FooterComponent,
     ProductsComponent,
     AddVinylComponent,

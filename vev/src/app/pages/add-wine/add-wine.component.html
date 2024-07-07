@@ -16,6 +16,11 @@
         <label for="description" class="mb-2">Descrizione</label>
         <textarea [(ngModel)]="wine.description" name="description" id="description" required class="form-control"></textarea>
       </div>
+
+      <div class="form-group">
+        <label for="price" class="mb-2">Prezzo</label>
+        <input [(ngModel)]="wine.price" name="price" type="number" id="price" required class="form-control">
+      </div>
   
       <div class="form-group">
         <label for="recommendedVinylId" class="mb-2">Vinili Consigliati</label>

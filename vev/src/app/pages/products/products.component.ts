@@ -6,6 +6,7 @@ import { Iwine } from '../../Models/iwine';
 import { SimpleWine } from '../../Models/simplewine';
 import { combineLatest } from 'rxjs';
 import { iUser, Role } from '../../Models/iuser';
+import { WishlistService } from '../../wishlist.service';
 
 
 @Component({
@@ -28,10 +29,40 @@ export class ProductsComponent implements OnInit {
   currentUser: iUser | null = null;
 
 
-  constructor(private authSvc: AuthService, private vinylSvc: VinylService) { }
+  constructor(private authSvc: AuthService, private vinylSvc: VinylService, private wishlistService: WishlistService) { }
 
   ngOnInit(): void {
-    this.loadVinyls();
+    this.loadVinyls(); // Chiamiamo prima il caricamento dei vinili
+
+    // Chiamiamo loadUserWishlist solo dopo che loadVinyls ha completato il caricamento dei vinili
+    this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
+      this.loadUserWishlist();
+    });
+  }
+
+  loadVinyls() {
+    this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
+      this.vinyls = vinyls; // Salva i vinili nell'array vinyls
+      this.filteredVinyls = vinyls;
+      console.log('Vinyls loaded:', this.vinyls);
+    });
+  }
+
+  loadUserWishlist() {
+    console.log("entrato in loadUserWishlist")
+    const userId = this.authSvc.getCurrentUserId();
+    if (userId) {
+      console.log("entrato in user id")
+
+      this.wishlistService.getWishlistByUserId(userId).subscribe((wishlist: any) => {
+        // Aggiorna lo stato isInWishlist per ogni vinile in base alla wishlist dell'utente
+        this.vinyls.forEach(vinyl => {
+          console.log(vinyl)
+
+          vinyl.isInWishlist = wishlist.products.some((product: any) => product.id === vinyl.id);
+        });
+      });
+    }
   }
 
   /* loadVinyls() {
@@ -41,23 +72,6 @@ export class ProductsComponent implements OnInit {
       console.log('Vinyls loaded:', this.vinyls);
     });
   } */
-
-    loadVinyls() {
-      this.authSvc.user$.subscribe((user: iUser | null) => {
-        console.log('User data:', user); 
-        if (user) {
-          this.isAdmin = !!user.roles && user.roles.some(role => role.roleType === 'ADMIN');
-        } else {
-          this.isAdmin = false;
-        }
-  
-        this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
-          this.vinyls = vinyls;
-          this.filteredVinyls = vinyls;
-          console.log('Vinyls loaded:', this.vinyls);
-        });
-      });
-    }
     
 
   openModal(vinyl: Vinyl): void {
@@ -101,13 +115,28 @@ export class ProductsComponent implements OnInit {
   toggleWishlist(vinyl: Vinyl): void {
     const userId = this.authSvc.getCurrentUserId();
     if (!userId) {
-      console.error('ID utente non valido');
+      console.error('Invalid user ID');
+
+      // Memorizza l'azione desiderata solo se vinyl.id è definito
+      if (vinyl.id !== undefined) {
+        this.authSvc.setDesiredAction({
+          action: 'toggleWishlist',
+          vinylId: vinyl.id
+        });
+      } else {
+        console.error('Invalid vinyl ID');
+      }
+
+      // Reindirizza l'utente alla pagina di login solo se non è già autenticato
+      this.authSvc.isLoggedIn$.subscribe((isLoggedIn) => {
+      });
       return;
     }
 
+    // Esegui l'azione sulla wishlist
     if (vinyl.id !== undefined) {
       if (vinyl.isInWishlist) {
-        this.authSvc.deleteWish(userId, vinyl.id).subscribe({
+        this.wishlistService.removeProductFromWishlist({ productId: vinyl.id }).subscribe({
           next: () => {
             console.log('Vinile rimosso dalla wishlist con successo!');
             vinyl.isInWishlist = false;
@@ -117,7 +146,7 @@ export class ProductsComponent implements OnInit {
           }
         });
       } else {
-        this.authSvc.addWish(userId, vinyl.id).subscribe({
+        this.wishlistService.addProductToWishlist({ productId: vinyl.id }).subscribe({
           next: () => {
             console.log('Vinile aggiunto alla wishlist con successo!');
             vinyl.isInWishlist = true;
@@ -147,8 +176,11 @@ export class ProductsComponent implements OnInit {
   getRecommendedWines(): SimpleWine[] {
     if (this.selectedVinyl && this.selectedVinyl.recommendedWines) {
       console.log('Entrato nel ramo con vini consigliati:', this.selectedVinyl.recommendedWines);
+      console.log('selectedVinyl:', this.selectedVinyl);
+    console.log('recommendedWines:', this.selectedVinyl.recommendedWines);
       const recommendedWines = this.selectedVinyl.recommendedWines.map(wine => ({
         id: wine.id,
+        price: wine.price,
         name: wine.name // Adatta a variety se questo è il nome corretto nel tuo backend
       }));
       console.log('Vini consigliati:', recommendedWines);

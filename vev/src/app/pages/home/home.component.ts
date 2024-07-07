@@ -5,6 +5,8 @@ import { iProduct } from '../../Models/iproduct';
 import { combineLatest } from 'rxjs';
 import { VinylService } from '../../vinyls.service';
 import { Vinyl } from '../../Models/vinyl';
+import { Router } from '@angular/router';
+import { WishlistService } from '../../wishlist.service';
 
 
 @Component({
@@ -35,18 +37,15 @@ export class HomeComponent {
   alertMessage: string = '';
 
   //private productsSvc: ProductsService, 
-  constructor(private authSvc: AuthService, private vinylSvc: VinylService) { }
+  constructor(private authSvc: AuthService, private vinylSvc: VinylService, private router: Router, private wishlistService: WishlistService,) { }
 
   ngOnInit(): void {
+    this.loadVinyls(); // Chiamiamo prima il caricamento dei vinili
 
+    // Chiamiamo loadUserWishlist solo dopo che loadVinyls ha completato il caricamento dei vinili
     this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
-      console.log(vinyls);
-    })
-
-    this.loadVinyls();
-
-    //this.loadProducts()
-
+      this.loadUserWishlist();
+    });
   }
 
   loadVinyls() {
@@ -55,6 +54,23 @@ export class HomeComponent {
       this.filteredVinyls = vinyls;
       console.log('Vinyls loaded:', this.vinyls);
     });
+  }
+
+  loadUserWishlist() {
+    console.log("entrato in loadUserWishlist")
+    const userId = this.authSvc.getCurrentUserId();
+    if (userId) {
+      console.log("entrato in user id")
+
+      this.wishlistService.getWishlistByUserId(userId).subscribe((wishlist: any) => {
+        // Aggiorna lo stato isInWishlist per ogni vinile in base alla wishlist dell'utente
+        this.vinyls.forEach(vinyl => {
+          console.log(vinyl)
+
+          vinyl.isInWishlist = wishlist.products.some((product: any) => product.id === vinyl.id);
+        });
+      });
+    }
   }
 
   addToCart(vinyl: Vinyl): void {
@@ -85,7 +101,7 @@ export class HomeComponent {
     }
   }
 
-  toggleWishlist(vinyl: Vinyl): void {
+  /* toggleWishlist(vinyl: Vinyl): void {
     const userId = this.authSvc.getCurrentUserId();
     if (!userId) {
       console.error('ID utente non valido');
@@ -117,7 +133,59 @@ export class HomeComponent {
     } else {
       console.error('ID del vinile non valido');
     }
-  }
+  } */
+
+    toggleWishlist(vinyl: Vinyl): void {
+      const userId = this.authSvc.getCurrentUserId();
+      if (!userId) {
+        console.error('Invalid user ID');
+  
+        // Memorizza l'azione desiderata solo se vinyl.id è definito
+        if (vinyl.id !== undefined) {
+          this.authSvc.setDesiredAction({
+            action: 'toggleWishlist',
+            vinylId: vinyl.id
+          });
+        } else {
+          console.error('Invalid vinyl ID');
+        }
+  
+        // Reindirizza l'utente alla pagina di login solo se non è già autenticato
+        this.authSvc.isLoggedIn$.subscribe((isLoggedIn) => {
+          if (!isLoggedIn) {
+            this.router.navigate(['/auth/login']);
+          }
+        });
+        return;
+      }
+  
+      // Esegui l'azione sulla wishlist
+      if (vinyl.id !== undefined) {
+        if (vinyl.isInWishlist) {
+          this.wishlistService.removeProductFromWishlist({ productId: vinyl.id }).subscribe({
+            next: () => {
+              console.log('Vinile rimosso dalla wishlist con successo!');
+              vinyl.isInWishlist = false;
+            },
+            error: (error) => {
+              console.error('Errore nella rimozione dalla wishlist', error);
+            }
+          });
+        } else {
+          this.wishlistService.addProductToWishlist({ productId: vinyl.id }).subscribe({
+            next: () => {
+              console.log('Vinile aggiunto alla wishlist con successo!');
+              vinyl.isInWishlist = true;
+            },
+            error: (error) => {
+              console.error('Errore nell\'aggiungere alla wishlist', error);
+            }
+          });
+        }
+      } else {
+        console.error('ID del vinile non valido');
+      }
+    }
   
 
   showSearch(event: any): void {

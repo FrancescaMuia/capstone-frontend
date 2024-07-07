@@ -13,6 +13,7 @@ export class AddWineComponent {
     variety: '',
     producer: '',
     description: '',
+    price: 0,
     recommendedVinylId: []
   };
 

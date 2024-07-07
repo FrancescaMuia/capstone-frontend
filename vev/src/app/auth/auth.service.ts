@@ -259,4 +259,8 @@ export class AuthService {
     }
     return new Error(`Qualcosa è andato storto! Dettagli: ${err.message}`);
   }
+
+  setDesiredAction(actionData: { action: string, vinylId: number }): void {
+    sessionStorage.setItem('desiredAction', JSON.stringify(actionData));
+  }
 }

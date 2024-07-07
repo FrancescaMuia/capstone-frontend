@@ -1,89 +1,82 @@
-/* import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { ProductsService } from '../../products.service';
-import { iProduct } from '../../Models/iproduct';
+import { switchMap } from 'rxjs/operators';
+import { Vinyl } from '../../Models/vinyl';
+import { WishlistService } from '../../wishlist.service';
+import { WishlistDTO } from '../../Models/wishlist';
+import { VinylService } from '../../vinyls.service';
 
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
-  styleUrl: './wishlist.component.scss'
+  styleUrls: ['./wishlist.component.scss']
 })
-export class WishlistComponent {
+export class WishlistComponent implements OnInit {
+  currentUserWishlistVinyls: Vinyl[] = [];
+  showAlert: boolean = false;
+  alertMessage: string = '';
+  vinyls:any;
+  filteredVinyls:any;
 
-  currentUserWishlistProducts: iProduct[] = [];
-  isAdmin: boolean = false;
-
-  showAlert:boolean = false
-  alertMessage:string =''
-
-  constructor(private authSvc: AuthService, private productsSvc: ProductsService) { }
+  constructor(
+    private authSvc: AuthService,
+    private wishlistService: WishlistService,
+    private vinylSvc: VinylService
+  ) {}
 
   ngOnInit(): void {
-    this.loadWishlist();
-    //this.checkAdminStatus();
-  }
-
-
-
-  loadWishlist(): void {
-    this.authSvc.user$.subscribe(user => {
-      if (user && user.wishlist && user.wishlist.length > 0) {
-        this.productsSvc.getWishlist(user.wishlist).subscribe(products => {
-          this.currentUserWishlistProducts = products;
-        });
-      } else {
-        this.currentUserWishlistProducts = [];
-      }
+    this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
+      console.log(vinyls);
+      this.vinyls = vinyls;
+      this.filteredVinyls = vinyls;
+      console.log('Vinyls loaded:', this.vinyls);
+  
+      // Carica la wishlist dell'utente dopo aver caricato i vinili
+      this.loadUserWishlist();
     });
   }
 
-  //checkAdminStatus(): void {
-    //this.authSvc.user$.subscribe(user => {
-    //  this.isAdmin = !!user && user.admin;
-    //});
-  //}
+  loadUserWishlist(): void {
+    console.log("Entrato in loadUserWishlist");
+    const userId = this.authSvc.getCurrentUserId();
+    if (userId) {
+      console.log("Entrato in user id");
+  
+      this.wishlistService.getWishlistByUserId(userId).subscribe((wishlist: WishlistDTO) => {
+        // Aggiorna lo stato isInWishlist per ogni vinile in base alla wishlist dell'utente
+        this.vinyls.forEach((vinyl:any) => {
+          vinyl.isInWishlist = wishlist.products.some(product => product.id === vinyl.id);
+        });
+        this.filteredVinyls=this.vinyls.filter((vinyl:any) => vinyl.isInWishlist);
+      });
+    }
+  }
+  
+
 
   removeFromWishlist(productId: number): void {
     const userId = this.authSvc.getCurrentUserId();
     if (userId) {
-      this.authSvc.deleteWish(userId, productId).subscribe({
-        next: () => {
-          console.log('Prodotto rimosso dalla wishlist con successo!');
-          this.currentUserWishlistProducts = this.currentUserWishlistProducts.filter(product => product.id !== productId);
+      this.wishlistService.removeProductFromWishlist({ productId }).subscribe({
+        next: (updatedWishlist:any) => {
+          console.log('Vinile rimosso dalla wishlist con successo!');
+          this.currentUserWishlistVinyls = updatedWishlist.products;
         },
-        error: (error) => console.error('Errore nella rimozione dalla wishlist', error)
+        error: (error:any) => console.error('Errore nella rimozione dalla wishlist', error)
       });
     } else {
       console.error('ID utente non valido');
     }
   }
 
-  addToCart(product: iProduct): void {
+  addToCart(vinyl: Vinyl): void {
     console.log('Aggiunta al carrello in corso...');
-
     const userId = this.authSvc.getCurrentUserId();
     if (!userId) {
       console.error('ID utente non valido');
       return;
     }
 
-    this.authSvc.addCart(userId, product.id).subscribe({
-      next: () => {
-        console.log('Prodotto aggiunto al carrello con successo!');
-        this.alertMessage = product.name + ' aggiunto al carrello!'
-        this.showAlert = true;
-        setTimeout(() => {
-          this.showAlert = false;
-        }, 2000);
-      },
-      error: (error) => {
-        console.error('Errore nell\'aggiungere al carrello', error);
-
-      }
-    });
+    
   }
-
-
-
 }
- */
