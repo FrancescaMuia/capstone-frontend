@@ -11,6 +11,8 @@ export interface Vinyl {
   genre: string;
   recommendedWines: SimpleWine[];
   isInWishlist?: boolean;
+  isInCart?: boolean;
+  recommendedWineIds?: number[]
 }
 
 /* interface iwine {

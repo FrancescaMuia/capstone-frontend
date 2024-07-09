@@ -47,6 +47,19 @@
         <label for="genre" class="mb-2">Genere</label>
         <input [(ngModel)]="vinyl.genre" name="genre" id="genre" required class="form-control">
       </div>
+
+      <div class="form-group">
+        <label for="wines" class="mb-2">Vini Raccomandati</label>
+        <div *ngIf="wines">
+          <div *ngFor="let wine of wines">
+            <input type="checkbox" 
+                   [value]="wine.id" 
+                   [checked]="selectedWineIds.includes(wine.id)" 
+                   (change)="onWineSelectionChange(wine.id, $event)">
+            {{wine.variety}} - {{wine.producer}}
+          </div>
+        </div>
+      </div>
   
       <button type="submit" class="btn btn-primary">Salva Modifiche</button>
       <button type="button" class="btn btn-danger" (click)="vinyl.id !== undefined && deleteVinyl(vinyl.id)">Elimina Vinile</button>

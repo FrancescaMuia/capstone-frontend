@@ -12,7 +12,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 //import { ProductDetailComponent } from './components/modals/product-detail/product-detail.component';
 //import { AddProductComponent } from './pages/add-product/add-product.component';
 //import { EditProductComponent } from './pages/edit-product/edit-product.component';
-//import { CartComponent } from './pages/cart/cart.component';
+import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { ErrorInterceptor } from './interceptors/auth.interceptor';
 import { ProductsComponent } from './pages/products/products.component';
@@ -20,6 +20,8 @@ import { AddVinylComponent } from './pages/add-vinyl/add-vinyl.component';
 import { AddWineComponent } from './pages/add-wine/add-wine.component';
 import { WineListComponent } from './pages/winelist/winelist.component';
 import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
+import { VinylWineAssociationComponent } from './pages/vinyl-wine-association/vinyl-wine-association.component';
+
 
 
 
@@ -33,14 +35,15 @@ import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
     //ProductDetailComponent,
     //AddProductComponent,
     //EditProductComponent,
-    //CartComponent,
+    CartComponent,
     WishlistComponent,
     FooterComponent,
     ProductsComponent,
     AddVinylComponent,
     AddWineComponent,
     WineListComponent,
-    EditVinylComponent
+    EditVinylComponent,
+    VinylWineAssociationComponent
     
     
   ],

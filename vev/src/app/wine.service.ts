@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
-import { Iwine } from './Models/iwine';
+import { Iwine, IwineWithId } from './Models/iwine';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class WineService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Iwine[]>{
-    return this.http.get<Iwine[]>(this.winesUrl);
+  getAll(): Observable<IwineWithId[]>{
+    return this.http.get<IwineWithId[]>(this.winesUrl);
   }
 
   getVinylById(id: number): Observable<Iwine> {

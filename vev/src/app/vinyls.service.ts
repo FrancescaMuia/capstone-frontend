@@ -86,4 +86,8 @@ export class VinylService {
   getWishlist(vinylIds: number[]): Observable<Vinyl[]> {
     return this.http.post<Vinyl[]>(`${this.vinylsUrl}/wishlist`, { vinylIds });
   }
+
+  getCart(vinylIds: number[]): Observable<Vinyl[]> {
+    return this.http.post<Vinyl[]>(`${this.vinylsUrl}/carts`, { vinylIds });
+  }
 }

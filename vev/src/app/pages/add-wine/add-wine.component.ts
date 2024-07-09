@@ -10,6 +10,7 @@ import { Iwine } from '../../Models/iwine';
 })
 export class AddWineComponent {
   wine: Iwine = {
+    name: '',
     variety: '',
     producer: '',
     description: '',

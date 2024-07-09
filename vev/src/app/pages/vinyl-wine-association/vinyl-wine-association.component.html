@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Associa Vinile e Vino</h1>
+    <div class="form-group">
+      <label for="vinylSelect">Seleziona Vinile:</label>
+      <select id="vinylSelect" class="form-control" [(ngModel)]="selectedVinylId">
+        <option *ngFor="let vinyl of vinyls" [value]="vinyl.id">{{ vinyl.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="wineSelect">Seleziona Vino:</label>
+      <select id="wineSelect" class="form-control" [(ngModel)]="selectedWineId">
+        <option *ngFor="let wine of wines" [value]="wine.id">{{ wine.name }}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" (click)="associateVinylAndWine()">Associa</button>
+  
+    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+  </div>
+  

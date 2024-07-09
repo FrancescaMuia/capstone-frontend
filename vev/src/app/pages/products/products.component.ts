@@ -7,6 +7,9 @@ import { SimpleWine } from '../../Models/simplewine';
 import { combineLatest } from 'rxjs';
 import { iUser, Role } from '../../Models/iuser';
 import { WishlistService } from '../../wishlist.service';
+import { CartService } from '../../cart.service';
+import { CartResponseDTO } from '../../Models/cart';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,15 +31,31 @@ export class ProductsComponent implements OnInit {
   isAdmin: boolean = false
   currentUser: iUser | null = null;
 
+  cart: CartResponseDTO | null = null;
+  quantity: number = 1;
 
-  constructor(private authSvc: AuthService, private vinylSvc: VinylService, private wishlistService: WishlistService) { }
+
+  constructor(private authSvc: AuthService, 
+    private vinylSvc: VinylService, 
+    private wishlistService: WishlistService,
+    private cartService: CartService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadVinyls(); // Chiamiamo prima il caricamento dei vinili
 
+    this.authSvc.isAdmin().subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+      console.log('isAdmin:', this.isAdmin); // Log per verificare il valore di isAdmin
+    });
+
     // Chiamiamo loadUserWishlist solo dopo che loadVinyls ha completato il caricamento dei vinili
     this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
       this.loadUserWishlist();
+    });
+
+    this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
+      this.loadUserCart();
     });
   }
 
@@ -65,6 +84,23 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  loadUserCart(): void {
+    const userId = this.authSvc.getCurrentUserId();
+    if (userId) {
+      this.cartService.getCartByUserId(userId).subscribe({
+        next: (cart) => {
+          this.cart = cart;
+        },
+        error: (error) => {
+          console.error('Errore nel caricare il carrello dell\'utente', error);
+        }
+      });
+    } else {
+      console.error('ID utente non valido');
+    }
+  }
+  
+
   /* loadVinyls() {
     this.vinylSvc.getAll().subscribe((vinyls: Vinyl[]) => {
       this.vinyls = vinyls; // Salva i vinili nell'array vinyls
@@ -85,23 +121,62 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(vinyl: Vinyl): void {
-    console.log('Aggiunta al carrello in corso...');
-
     const userId = this.authSvc.getCurrentUserId();
     if (!userId) {
       console.error('ID utente non valido');
+
+      if (vinyl.id !== undefined) {
+        this.authSvc.setDesiredAction({
+          action: 'addToCart',
+          vinylId: vinyl.id
+        });
+      } else {
+        console.error('ID del vinile non valido');
+      }
+
+      this.router.navigate(['/auth/login']);
       return;
     }
 
     if (vinyl.id !== undefined) {
-      this.authSvc.addCart(userId, vinyl.id).subscribe({
-        next: () => {
+      const cartItemRequestDTO = {
+        userId: userId,
+        productId: vinyl.id,
+        quantity: this.quantity
+      };
+
+      this.cartService.addItem(cartItemRequestDTO).subscribe({
+        next: (response) => {
           console.log('Vinile aggiunto al carrello con successo!');
           this.alertMessage = vinyl.name + ' aggiunto al carrello!';
           this.showAlert = true;
-          setTimeout(() => {
-            this.showAlert = false;
-          }, 2000);
+          this.loadUserCart();
+
+          // Aggiungi il vino selezionato al carrello, se esiste
+          if (this.selectedRecommended) {
+            const wineCartItemRequestDTO = {
+              userId: userId,
+              productId: this.selectedRecommended.id,
+              quantity: 1
+            };
+
+            this.cartService.addItem(wineCartItemRequestDTO).subscribe({
+              next: (response) => {
+                console.log('Vino aggiunto al carrello con successo!');
+                this.alertMessage += ' aggiunto al carrello!';
+                setTimeout(() => {
+                  this.showAlert = false;
+                }, 4000);  // Estende il timeout per il messaggio di alert
+              },
+              error: (error) => {
+                console.error('Errore nell\'aggiungere il vino al carrello', error);
+              }
+            });
+          } else {
+            setTimeout(() => {
+              this.showAlert = false;
+            }, 2000);
+          }
         },
         error: (error) => {
           console.error('Errore nell\'aggiungere al carrello', error);
@@ -110,7 +185,11 @@ export class ProductsComponent implements OnInit {
     } else {
       console.error('ID del vinile non valido');
     }
+    this.showModal = false;
   }
+  
+  
+  
 
   toggleWishlist(vinyl: Vinyl): void {
     const userId = this.authSvc.getCurrentUserId();

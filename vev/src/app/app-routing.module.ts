@@ -14,6 +14,8 @@ import { EditVinylComponent } from './pages/edit-vinyl/edit-vinyl.component';
 //import { AddProductComponent } from './pages/add-product/add-product.component';
 //import { CartComponent } from './pages/cart/cart.component';
 import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { VinylWineAssociationComponent } from './pages/vinyl-wine-association/vinyl-wine-association.component';
 
 
 
@@ -61,6 +63,16 @@ const routes: Routes = [
   {
     path:'wishlist',
     component:WishlistComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'cart',
+    component:CartComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'associate',
+    component:VinylWineAssociationComponent,
     canActivate: [AuthGuard]
   },
   /* {
