@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i');
-body{
+
+@import '../../../colors';
+/* body{
   font-family: 'Muli', sans-serif;
   background:#fff;
-}
+} */
 
 .wsk-cp-product{
   background:rgba(42, 46, 78, 0.6);
@@ -283,4 +285,78 @@ button.buy-btn{
   background:#303aad;
   color: white;
   text-decoration:none;
+}
+
+
+.custom-margin {
+  margin-top: 5rem;
+}
+
+.title-color{
+  color: $background-color;
+}
+
+.subtitle{
+  color: $background-color;
+}
+
+.custom-table {
+  --bs-table-bg: #FAF0D7; /* Colore di sfondo della tabella */
+  --bs-table-striped-bg: rgba(250, 240, 215, 0.75); /* Colore di sfondo delle righe pari */
+  --bs-table-hover-bg: rgba(250, 240, 215, 0.9); /* Colore di sfondo al passaggio del mouse */
+  --bs-table-color: #000; /* Colore del testo */
+  --bs-table-border-color: rgba(250, 240, 215, 0); /* Colore del bordo */
+  border-radius: .75rem;
+}
+
+.custom-table {
+  width: 100%;
+  margin-bottom: 1rem;
+  vertical-align: top;
+  border-color: var(--bs-table-border-color);
+}
+
+.custom-table th {
+  background-color: $secondary-color;
+  padding: 10px;
+  text-align: left;
+}
+
+.custom-table th:first-child {
+  border-top-left-radius: .75rem; /* Per il bordo superiore sinistro arrotondato */
+}
+
+.custom-table th:last-child {
+  border-top-right-radius: .75rem; /* Per il bordo superiore destro arrotondato */
+}
+
+.custom-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: .75rem; /* Per il bordo inferiore sinistro arrotondato */
+}
+
+.custom-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: .75rem; /* Per il bordo inferiore destro arrotondato */
+}
+
+.custom-table thead,
+.custom-table tbody {
+  padding-left: 3.5rem; /* Imposta il padding a sinistra desiderato */
+}
+
+.custom-table thead th,
+.custom-table tbody td {
+  padding-left: 3.5rem; /* Imposta il padding a sinistra desiderato */
+}
+
+
+.btn-cart-pg{
+  background-color: $extra-color;
+  color: $background-color;
+  border: 2px solid $extra-color;
+}
+
+.btn-cart-pg:hover{
+  background-color: $secondary-color;
+  color: $background-color;
+  border: 2px solid $secondary-color;
 }

@@ -61,3 +61,17 @@ img{
   background-color: $tertiary-color;
   color: $background-color;
 }
+
+.btn-wishlist i,
+.btn-cart i,
+.btn-home,
+.btn-home i{
+  color: $primary-color;
+}
+
+.btn-wishlist:hover i,
+.btn-cart:hover i,
+.btn-home:hover,
+.btn-home:hover i{
+  color: $tertiary-color;
+}

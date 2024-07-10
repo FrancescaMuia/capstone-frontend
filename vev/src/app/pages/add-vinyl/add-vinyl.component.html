@@ -1,7 +1,7 @@
 <div class="text-white col-10 col-md-8 col-lg-6 mx-auto">
     <h1 class="mt-5 mb-2">Aggiungi Nuovo Vinile</h1>
   
-    <form class="d-flex flex-column gap-3" (ngSubmit)="saveVinyl()">
+    <form class="d-flex flex-column gap-3 custom-form" (ngSubmit)="saveVinyl()">
   
       <div class="form-group">
         <label for="name" class="mb-2">Nome</label>
@@ -33,7 +33,7 @@
         <input [(ngModel)]="vinyl.genre" name="genre" id="genre" required class="form-control">
       </div>
 
-      <button type="submit" class="btn btn-primary">Aggiungi Vinile</button>
+      <button type="submit" class="btn btn-global mx-auto w-50">Aggiungi Vinile</button>
     </form>
   </div>
   

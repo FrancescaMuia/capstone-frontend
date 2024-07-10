@@ -1,16 +1,24 @@
-.btn {
+@import '../../../colors';
+
+/* .btn {
   width: 130px;
   height: 40px;
   font-size: 1.1em;
   cursor: pointer;
-  background-color: #6D1666;
+  
   color: #fff;
   border: none;
   border-radius: 5px;
   transition: all .4s;
- }
+ } */
 
- .btn:hover {
+ .btn {
+  width: 130px;
+  height: 40px;
+  font-size: 1.1em;
+}
+
+ /* .btn:hover {
   border-radius: 5px;
   transform: translateY(-10px);
   box-shadow: 5px 7px 0 -2px #cb2376,
@@ -25,7 +33,7 @@
   box-shadow: 5px 2px 0 -2px #cb2376,
    10px 8px 0 -4px #39a2db,
    10px 12px 10px -3px #39a2db;
- }
+ } */
 
  body{
   //background-image: url(../../../assets/img/background.jpg);
@@ -35,4 +43,45 @@
 
 .register-wrapper{
   margin-block: 50px;
+}
+
+.register-wrapper{
+  margin-block: 50px;
+  background-image: url('../../../assets/wooden-textured-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px;
+  height: 60vh;
+}
+
+.title-bold{
+  font-family: 'ObjectSans', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $background-color;
+}
+
+.btn-registrati {
+  --bs-btn-padding-x: initial; /* Rimuove il padding orizzontale predefinito */
+  --bs-btn-padding-y: initial; /* Rimuove il padding verticale predefinito */
+  padding: 0; /* Imposta il padding a 0 o qualsiasi altro valore desiderato */
+}
+
+.btn-registrati {
+  background-color: $extra-color;
+  color: $background-color;
+  border: 2px solid $extra-color;
+  transition: background-color 0.3s ease;
+  border-radius: .75rem;
+  font-family: 'ObjectSans', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+
+}
+
+.btn-accedi:hover{
+  background-color: $secondary-color;
+  color: $background-color;
+  border: 2px solid $secondary-color;
 }

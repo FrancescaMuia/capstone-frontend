@@ -1,4 +1,21 @@
 <app-header></app-header>
+<div *ngIf="isHomePage" class="wrap-presentation">
+  <div class="presentation">
+    <div class="overlay">
+      <div class="overlay-intro">
+        <h2 class="slogan">Vini e Vinili!</h2>
+      
+        <p>
+          Benvenuti nel nostro e-commerce, dove la passione per i vinili retrò si unisce all'eleganza del buon vino.
+          Offriamo un'esperienza unica, abbinando ogni disco a una selezione di vini consigliati, per creare momenti di pura armonia.
+          Immergetevi in un'atmosfera nostalgica e sofisticata, perfetta per gli amanti della musica e del vino.
+        </p>
+      </div>
+        
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <router-outlet></router-outlet>
 </div>

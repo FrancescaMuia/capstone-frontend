@@ -51,3 +51,20 @@ body{
     font-weight: bold;
     text-transform: uppercase;
   }
+
+  .btn-global {
+    background-color: $secondary-color;
+    color: $background-color;
+    border: 2px solid $secondary-color;
+    transition: background-color 0.3s ease;
+    border-radius: .75rem;
+    font-family: 'ObjectSans', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .btn-global:hover{
+    background-color: $primary-color;
+    color: $background-color;
+    border: 2px solid $primary-color;
+  }

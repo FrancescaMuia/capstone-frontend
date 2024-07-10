@@ -3,7 +3,7 @@
   
     <h4 class="mb-4">#ID {{vinyl.id}}</h4>
   
-    <form class="d-flex flex-column gap-3 mb-5" (ngSubmit)="saveVinyl()">
+    <form class="d-flex flex-column gap-3 mb-5 custom-form" (ngSubmit)="saveVinyl()">
   
       <div class="form-group">
         <label for="name" class="mb-2">Nome</label>
@@ -61,8 +61,8 @@
         </div>
       </div>
   
-      <button type="submit" class="btn btn-primary">Salva Modifiche</button>
-      <button type="button" class="btn btn-danger" (click)="vinyl.id !== undefined && deleteVinyl(vinyl.id)">Elimina Vinile</button>
+      <button type="submit" class="btn btn-global mx-auto w-50">Salva Modifiche</button>
+      <button type="button" class="btn btn-danger btn-global btn-edit-delete mx-auto w-50" (click)="vinyl.id !== undefined && deleteVinyl(vinyl.id)">Elimina Vinile</button>
 
     </form>
   </div>

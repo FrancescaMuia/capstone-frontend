@@ -1,14 +1,14 @@
 <div class="container">
   <div class="header">
     <h1 class="title-bold">Lista di Vinili</h1>
-    <input class="searchbar" type="text" placeholder="Cerca..." (input)="showSearch($event)" />
+    <!-- <input class="searchbar" type="text" placeholder="Cerca..." (input)="showSearch($event)" /> -->
   </div>
   
   <div class="alert" *ngIf="showAlert">
     {{ alertMessage }}
   </div>
 
-  <div>
+  <div class="content-add-btn">
     <i *ngIf="isAdmin" routerLink="/add-vinyl" role="button" title="Aggiungi un vinile" class="add-vinyl mb-2">Aggiungi vinile</i>
     <i *ngIf="isAdmin" routerLink="/add-wine" role="button" title="Aggiungi un vino" class="add-vinyl mb-2">Aggiungi vino</i>
   </div>
@@ -19,9 +19,10 @@
         <div class="card-body">
           <h5 class="card-title">{{ vinyl.name }}</h5>
         </div>
-        <img [src]="vinyl.coverImg" class="card-img-top" alt="{{ vinyl.name }} cover image">
+        <img [src]="vinyl.coverImg" class="card-img-top vinyl-img" alt="{{ vinyl.name }} cover image">
         <div class="card-body">
           <p class="card-text">{{ vinyl.year }}</p>
+          <p class="card-text">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</p>
           <!-- <p class="card-text">{{ getArtists(vinyl) }}</p> -->
           <div class="d-flex justify-content-between align-items-center icon-buttons">
             <button (click)="openModal(vinyl)" class="btn btn-primary">
@@ -31,8 +32,10 @@
               <i class="fas fa-heart" [ngClass]="{ 'text-danger': vinyl.isInWishlist }"></i>
 
             </button>
-            <i *ngIf="isAdmin" [routerLink]="['/edit-vinyl', vinyl.id]" role="button" title="Modifica un vinile" class="add-vinyl mb-2">Modifica vinile</i>
 
+            <button *ngIf="isAdmin" [routerLink]="['/edit-vinyl', vinyl.id]" role="button" title="Modifica un vinile" class="btn btn-warning mb-2">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
           </div>
         </div>
       </div>

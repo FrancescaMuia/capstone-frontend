@@ -1,9 +1,4 @@
 <div class="container">
-  <div class="presentation">
-    <div class="overlay">
-      <h2 class="slogan">Benvenuti nel mondo dei Vinili!</h2>
-    </div>
-  </div>
   <div class="header">
     <h1 class="title-bold">I nostri Vinili</h1>
   </div>
@@ -35,11 +30,12 @@
         <div class="card-body">
           <h5 class="card-title">{{ vinyl.name }}</h5>
         </div>
-        <img [src]="vinyl.coverImg" class="card-img-top" alt="{{ vinyl.name }} cover image">
+        <img [src]="vinyl.coverImg" class="card-img-top vinyl-img" alt="{{ vinyl.name }} cover image">
         <div class="card-body">
           <p class="card-text">{{ vinyl.year }}</p>
+          <p class="card-text">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</p>
           <!-- <p class="card-text">{{ getArtists(vinyl) }}</p> -->
-          <div class="d-flex justify-content-between align-items-center icon-buttons">
+          <!-- <div class="d-flex justify-content-between align-items-center icon-buttons">
             <button (click)="addToCart(vinyl)" class="btn btn-primary">
               <i class="fas fa-shopping-cart"></i>
             </button>
@@ -47,13 +43,13 @@
               <i class="fas fa-heart" [ngClass]="{ 'text-danger': vinyl.isInWishlist }"></i>
 
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
   </div>
-  <div class="text-center mt-4">
-    <button class="btn btn-primary" [routerLink]="['/products']">Vai alla pagina dei prodotti</button>
+  <div class="text-center mt-4 pt-4">
+    <button class="btn btn-global" [routerLink]="['/products']">Vai alla pagina dei prodotti</button>
   </div>
 </div>
 

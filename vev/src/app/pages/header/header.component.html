@@ -2,7 +2,7 @@
 
     <ul class="nav col-7 col-md-auto mb-2 justify-content-center align-items-center mb-md-0">
       <img routerLink="/home" class="mt-2 me-2" src="../../../assets/Senza-titolo-1.png" alt="logo">
-      <li><a *ngIf="isUserLoggedIn" routerLink="/home" class="nav-link text-white px-2"><i class="fas fa-home"></i> Home</a></li>
+      <li><a *ngIf="isUserLoggedIn" routerLink="/home" class="nav-link px-2 btn-home"><i class="fas fa-home"></i> Home</a></li>
       <li></li>
     </ul>
   
@@ -10,8 +10,8 @@
       <button *ngIf="!isUserLoggedIn" type="button" routerLink="/auth/login" class="btn me-2 btn-accedi">Accedi</button>
       <button *ngIf="!isUserLoggedIn" type="button" routerLink="/auth/register" class="btn btn-registrati">Registrati</button>
       <div class="row justify-content-end align-items-center gap-3">
-        <a title="Lista dei desideri" *ngIf="isUserLoggedIn&&!isAdmin" routerLink="/wishlist" class="col-1 nav-link text-white px-2"><i class="fas fa-heart"></i></a>
-        <a title="Carrello" *ngIf="isUserLoggedIn&&!isAdmin"  routerLink="/cart" class="col-1 nav-link text-white px-2"><i class="fas fa-shopping-cart"></i></a>
+        <a title="Lista dei desideri" *ngIf="isUserLoggedIn&&!isAdmin" routerLink="/wishlist" class="col-1 nav-link text-white px-2 btn-wishlist"><i class="fas fa-heart"></i></a>
+        <a title="Carrello" *ngIf="isUserLoggedIn&&!isAdmin"  routerLink="/cart" class="col-1 nav-link text-white px-2 btn-cart"><i class="fas fa-shopping-cart"></i></a>
   
         <button (click)="logout()" *ngIf="isUserLoggedIn" class="col-10 col-md-3 col-lg-2 btn me-2 btn-exit">Esci</button>
       </div>

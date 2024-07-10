@@ -1,4 +1,55 @@
+@import '../colors';
+
 .container{
     min-height: calc(100vh - 170px);
 
   }
+
+  .presentation {
+    position: relative;
+    background-image: url('../assets/vinyl-record-with-retro-texture-composition.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .overlay-intro{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 4rem;
+  }
+
+  .overlay p {
+    font-size: 1.2rem;
+    margin: 0;
+    font-family: ObjectSans, sans-serif;
+    margin: 4rem 25rem 4rem 25rem;
+    color: $background-color;
+  }
+
+  .slogan {
+    color: $background-color;
+    font-size: 3.5rem;
+    text-align: center;
+    font-family: ObjectSans;
+    font-weight: bold;
+    text-transform:uppercase;
+    }

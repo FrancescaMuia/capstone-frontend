@@ -4,13 +4,16 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-}
+  padding-bottom: 3rem;
+/*   margin-top: 5rem;
+ */}
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  margin-top: 5rem;
 }
 
 .header input {
@@ -32,6 +35,10 @@
   outline: none;
   font-family: ObjectSans;
   font-weight: normal;
+}
+
+.row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4.vinyls-container {
+  padding-bottom: 3rem;
 }
 
 .vinyl-item {
@@ -66,8 +73,14 @@
 
 .vinyl-item img {
   max-width: 50%;
-  height: auto;
+  /* height: auto; */
   margin-bottom: 10px;
+}
+
+.vinyl-img {
+  height: 200px;
+  object-fit: cover; 
+  width: 100%;
 }
 
 .icon-buttons {
@@ -172,11 +185,20 @@
 }
 
 .add-vinyl {
-  font-size: 2rem; /* Dimensione dell'icona */
-  color: #007bff; /* Colore dell'icona */
-  cursor: pointer; /* Cambia il cursore quando si passa sopra */
+  font-size: 1.5rem;
+  color: $background-color; 
+  font-family: 'ObjectSans', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  cursor: pointer;
 }
 
 .add-vinyl:hover {
-  color: #0056b3; /* Cambia colore quando si passa sopra */
+  color: $secondary-color;
+}
+
+.content-add-btn {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
 }

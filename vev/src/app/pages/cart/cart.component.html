@@ -1,13 +1,13 @@
-<div *ngIf="currentUserCartVinyls.length > 0; else emptyCart">
-  <h1 class="mt-5 mb-3 text-white">Il tuo carrello</h1>
+<div *ngIf="currentUserCartVinyls.length > 0; else emptyCart" class="custom-margin">
+  <h1 class="mt-5 mb-3 title-bold title-color">Il tuo carrello</h1>
   <div [ngClass]="{'scrolled': scrolled}" data-bs-stackable="true" data-bs-toggle="sticky" class="sticky-top d-flex align-items-center justify-content-between mb-3">
-    <h2 class="text-white me-5">Totale Carrello: {{ totalCartPrice | currency:'EUR':'symbol' }}</h2>
+    <h2 class="me-5 subtitle">Totale Carrello: {{ totalCartPrice | currency:'EUR':'symbol' }}</h2>
 <!--     <button (click)="openEnd(content)" class="btn btn-primary me-5">Procedi al checkout</button>
  -->  </div>
 
  <div class="shell position-relative" [ngClass]="{'scrolled': scrolled}">
   <div class="container">
-    <table class="table table-striped">
+    <table class="table table-striped custom-table">
       <thead>
         <tr>
           <th>Nome</th>
@@ -24,13 +24,13 @@
           <td>{{ cartItem.quantity }}</td>
           <td>{{ cartItem.price | currency : 'EUR' : 'symbol' }}</td>
           <td>
-            <button (click)="removeFromCart(cartItem.productId)" class="btn btn-danger">Rimuovi</button>
+            <button (click)="removeFromCart(cartItem.productId)" class="btn btn-danger btn-global btn-cart-pg">Rimuovi</button>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <button (click)="checkout()" class="btn btn-primary mt-3">Acquista</button>
+    <button (click)="checkout()" class="btn btn-primary mt-3 btn-global">Acquista</button>
   </div>
 </div>
 
