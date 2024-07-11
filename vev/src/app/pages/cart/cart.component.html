@@ -30,16 +30,16 @@
       </tbody>
     </table>
 
-    <button (click)="checkout()" class="btn btn-primary mt-3 btn-global">Acquista</button>
+    <button (click)="checkout()" class="btn mt-3 btn-global">Acquista</button>
   </div>
 </div>
 
 </div>
 
-<div *ngIf="showAlert" class="alert alert-primary position-absolute bottom-50 start-50">Acquisto effettuato con successo!</div>
+<div *ngIf="showAlert" class="alert alert-primary position-absolute bottom-50 start-50 custom-alert">Acquisto effettuato con successo!</div>
 
 <ng-template #emptyCart>
-  <h1 class="my-5 text-white">Il tuo carrello è vuoto.</h1>
+  <h1 class="my-5 empty-cart-mex">Il tuo carrello è vuoto.</h1>
 </ng-template>
 
 <!-- <ng-template #content let-offcanvas>

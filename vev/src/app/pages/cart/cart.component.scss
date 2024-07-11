@@ -360,3 +360,24 @@ button.buy-btn{
   color: $background-color;
   border: 2px solid $secondary-color;
 }
+
+.custom-alert {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: auto;
+  max-width: 90%; 
+  padding: 10px 20px;
+  text-align: center;
+  display: block;
+  background-color: $secondary-color;
+  border-color: $secondary-color;
+  color: $background-color;
+  font-size: 25px;
+}
+
+.empty-cart-mex{
+  color: $background-color;
+}

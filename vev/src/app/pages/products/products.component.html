@@ -4,7 +4,7 @@
     <!-- <input class="searchbar" type="text" placeholder="Cerca..." (input)="showSearch($event)" /> -->
   </div>
   
-  <div class="alert" *ngIf="showAlert">
+  <div class="alert custom-alert" *ngIf="showAlert">
     {{ alertMessage }}
   </div>
 
@@ -106,7 +106,7 @@
             <input type="number" id="quantity" class="form-control" [(ngModel)]="quantity" min="1" />
           </div>
   
-          <button class="btn btn-primary mt-3" (click)="addToCart(selectedVinyl!)">Aggiungi al carrello</button>
+          <button class="btn mt-3 btn-global" (click)="addToCart(selectedVinyl!)">Aggiungi al carrello</button>
         </div>
       </div>
     </div>

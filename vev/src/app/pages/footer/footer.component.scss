@@ -103,6 +103,18 @@ footer{
   animation: bounce_613 0.4s linear;
 }
 
+.social-link {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.linkedin-logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
 @keyframes bounce_613 {
   40% {
     transform: scale(1.4);

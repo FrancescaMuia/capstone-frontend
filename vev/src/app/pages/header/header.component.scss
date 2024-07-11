@@ -75,3 +75,10 @@ img{
 .btn-home:hover i{
   color: $tertiary-color;
 }
+
+.navbar-logo {
+  max-height: 50px;
+  height: auto;
+  width: auto; 
+  object-fit: contain;
+}

@@ -1,38 +1,59 @@
 <div *ngIf="filteredVinyls.length > 0; else emptyWishlist">
-  <h1 class="my-5 text-white">La tua lista dei desideri</h1>
-  <div class="shell">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-        <div class="col" *ngFor="let vinyl of filteredVinyls">
-          <div class="wsk-cp-product">
-            <div class="wsk-cp-img">
-              <img [src]="vinyl.coverImg" class="img-responsive" [alt]="vinyl.name" />
-            </div>
-            <div class="wsk-cp-text">
-              <div class="category">
-                <span>{{ vinyl.genre }}</span>
-              </div>
+  <div class="container">
+    <div class="shell-title">
+    <h1 class="mb-4 title-bold">La tua lista dei desideri</h1>
+  </div>
+    <div class="shell">
+      
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div class="col" *ngFor="let vinyl of filteredVinyls">
+            <!-- <div class="wsk-cp-product">
               <div class="title-product">
                 <h3>{{ vinyl.name }}</h3>
               </div>
-              <div class="description-prod">
-                <p>{{ 'Anno: ' + vinyl.year }}</p>
+              <div class="wsk-cp-img">
+                <img [src]="vinyl.coverImg" class="img-responsive" [alt]="vinyl.name" />
               </div>
-              <div class="card-footer pt-2 d-flex align-items-center justify-content-between">
-                <div class="wcf-left">
-                  <span class="price fs-4">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</span>
+              <div class="wsk-cp-text">
+                <div class="category">
+                  <span>{{ vinyl.genre }}</span>
                 </div>
-                <div class="d-flex align-items-center justify-content-end">
-<!--                   <i role="button" class="remove-btn text-white me-3 fas fa-times" (click)="removeFromWishlist(vinyl.id)"></i>
- -->                  <button title="{{ vinyl.available ? '' : 'Prodotto momentaneamente non disponibile' }}" class="buy-btn text-white rounded-5 border-0 wcf-right" [disabled]="!vinyl.available" (click)="addToCart(vinyl)">
-                    <i class="fas fa-shopping-cart"></i>
-                  </button>
+                
+                <div class="description-prod">
+                  <p>{{ 'Anno: ' + vinyl.year }}</p>
+                </div>
+                <div class="card-footer pt-2 d-flex align-items-center justify-content-between">
+                  <div class="wcf-left">
+                    <span class="price fs-4">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-end">
+                    <i role="button" class="remove-btn text-white me-3 fas fa-times" (click)="removeFromWishlist(vinyl.id)"></i>
+                    <button title="{{ vinyl.available ? '' : 'Prodotto momentaneamente non disponibile' }}" class="buy-btn text-white rounded-5 border-0 wcf-right" [disabled]="!vinyl.available" (click)="addToCart(vinyl)">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="card vinyl-item" >
+              <div class="card-body">
+                <h5 class="card-title">{{ vinyl.name }}</h5>
+              </div>
+              <img [src]="vinyl.coverImg" class="card-img-top vinyl-img" alt="{{ vinyl.name }} cover image">
+              <div class="card-body">
+                <p class="card-text">{{ vinyl.year }}</p>
+                <p class="card-text">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</p>
+                <!-- <p class="card-text">{{ getArtists(vinyl) }}</p> -->
+                <div class="d-flex justify-content-between align-items-center icon-buttons">
+                  
+      
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      
     </div>
   </div>
 </div>
