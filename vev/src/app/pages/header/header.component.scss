@@ -2,6 +2,7 @@
 
 header{
   background-color: $background-color;
+
   backdrop-filter: blur(8px);
   transition: background-color 0.3s ease;
   height: 70px;
@@ -11,10 +12,6 @@ header.scrolled {
   background-color: rgba(250, 240, 215, 0.6);
 }
 
-img{
-  height: 30px;
-  cursor: pointer;
-}
 
 .btn-accedi {
   color: $secondary-color;
@@ -45,6 +42,7 @@ img{
   font-family: 'ObjectSans', sans-serif;
   font-weight: bold;
   text-transform: uppercase;
+  padding-inline: 10px;
 }
 
 .btn-accedi:hover{
@@ -77,8 +75,10 @@ img{
 }
 
 .navbar-logo {
-  max-height: 50px;
+  max-height: 70px;
   height: auto;
   width: auto; 
   object-fit: contain;
+
+  
 }
