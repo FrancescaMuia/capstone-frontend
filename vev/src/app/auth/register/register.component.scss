@@ -40,6 +40,12 @@
   background-size: cover;
 }
 
+#container-register-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 170px);
+}
 
 .register-wrapper{
   margin-block: 50px;

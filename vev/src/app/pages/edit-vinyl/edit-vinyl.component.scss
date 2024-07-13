@@ -21,6 +21,7 @@
   .wine-list{
     overflow-y: auto;
     max-height: 100px;
+    margin-bottom: 2rem;
   }
 
   /* Sfondo scrollbar */
@@ -33,4 +34,8 @@
 ::-webkit-scrollbar-thumb {
   background-color: $background-color;
   border-radius: 1rem;
+}
+
+.title-bold {
+  color: #FAF0D7;
 }

@@ -3,3 +3,14 @@
     font-family: 'ObjectSans', sans-serif;
     font-weight: normal;
   }
+
+  .title-bold {
+    color: #FAF0D7;
+}
+
+#container-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 170px);
+}

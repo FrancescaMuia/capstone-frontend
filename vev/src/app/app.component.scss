@@ -9,7 +9,7 @@
     position: relative;
     background-image: url('../assets/vinyl-record-with-retro-texture-composition.jpg'); 
     background-size: cover;
-    background-position: center;
+    background-attachment: fixed;
     height: 500px;
     margin-bottom: 20px;
     display: flex;
@@ -36,6 +36,7 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 4rem;
+
   }
 
   .overlay p {
@@ -44,6 +45,8 @@
     font-family: ObjectSans, sans-serif;
     margin: 4rem 25rem 4rem 25rem;
     color: $background-color;
+    min-width: 800px;
+
   }
 
   .slogan {

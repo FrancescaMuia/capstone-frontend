@@ -6,6 +6,8 @@ header{
   backdrop-filter: blur(8px);
   transition: background-color 0.3s ease;
   height: 70px;
+  border-bottom: 2px solid rgba(227, 212, 179, 0.709);
+  box-shadow: 5px 0 5px 0 rgba(0, 0, 0, 0.188);
 }
 
 header.scrolled {

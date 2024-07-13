@@ -29,7 +29,7 @@ export class HeaderComponent {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (window.pageYOffset > 155) {
+    if (window.scrollY > 155) {
       this.scrolled = true;
     } else {
       this.scrolled = false;

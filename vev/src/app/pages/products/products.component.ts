@@ -242,6 +242,7 @@ export class ProductsComponent implements OnInit {
 
   showSearch(event: any): void {
     const searchTerm = event?.target.value.trim().toLowerCase();
+    console.log('Search term:', searchTerm);
     if (searchTerm !== '') {
       this.filteredVinyls = this.vinyls.filter(vinyl =>
         vinyl.name.toLowerCase().includes(searchTerm) ||
@@ -250,6 +251,7 @@ export class ProductsComponent implements OnInit {
     } else {
       this.filteredVinyls = [...this.vinyls];
     }
+    console.log('Filtered vinyls:', this.filteredVinyls);
   }
 
   getRecommendedWines(): SimpleWine[] {
