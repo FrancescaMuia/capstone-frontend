@@ -72,15 +72,25 @@
 
 
 .vinyl-item img {
-  max-width: 50%;
+  //max-width: 50%;
   /* height: auto; */
   margin-bottom: 10px;
 }
 
 .vinyl-img {
-  height: 200px;
+  position: relative;
+  height: 130px;
   object-fit: cover; 
-  width: 100%;
+  //width: 100%;
+  aspect-ratio: 1;
+}
+
+.vinyl-mask{
+  position: absolute;
+  z-index: 5;
+  height: 132px;
+  top: -1px;
+  left: -1px;
 }
 
 .icon-buttons {

@@ -25,29 +25,31 @@
   </div> -->
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 vinyls-container">
-    <div *ngFor="let vinyl of vinyls" class="col">
-      <div class="card vinyl-item">
-        <div class="card-body">
-          <h5 class="card-title">{{ vinyl.name }}</h5>
-        </div>
-        <img [src]="vinyl.coverImg" class="card-img-top vinyl-img" alt="{{ vinyl.name }} cover image">
-        <div class="card-body">
-          <p class="card-text">{{ vinyl.year }}</p>
-          <p class="card-text">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</p>
-          <!-- <p class="card-text">{{ getArtists(vinyl) }}</p> -->
-          <!-- <div class="d-flex justify-content-between align-items-center icon-buttons">
-            <button (click)="addToCart(vinyl)" class="btn btn-primary">
-              <i class="fas fa-shopping-cart"></i>
-            </button>
-            <button (click)="toggleWishlist(vinyl)" class="btn btn-danger">
-              <i class="fas fa-heart" [ngClass]="{ 'text-danger': vinyl.isInWishlist }"></i>
-
-            </button>
-          </div> -->
+    <ng-container *ngIf="vinyls && vinyls.length > 0">
+      <div *ngFor="let vinyl of vinyls.slice(0, 6)" class="col">
+        <div class="card vinyl-item">
+          <div class="card-body">
+            <h5 class="card-title">{{ vinyl.name }}</h5>
+          </div>
+          <img [src]="vinyl.coverImg" class="card-img-top vinyl-img" alt="{{ vinyl.name }} cover image">
+          <div class="card-body">
+            <p class="card-text">{{ vinyl.year }}</p>
+            <p class="card-text">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</p>
+            <!-- <p class="card-text">{{ getArtists(vinyl) }}</p> -->
+            <!-- <div class="d-flex justify-content-between align-items-center icon-buttons">
+              <button (click)="addToCart(vinyl)" class="btn btn-primary">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+              <button (click)="toggleWishlist(vinyl)" class="btn btn-danger">
+                <i class="fas fa-heart" [ngClass]="{ 'text-danger': vinyl.isInWishlist }"></i>
+              </button>
+            </div> -->
+          </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
+  
   <div class="text-center mt-4 pt-4">
     <button class="btn btn-global" [routerLink]="['/products']">Vai alla pagina dei prodotti</button>
   </div>

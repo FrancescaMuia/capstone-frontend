@@ -19,7 +19,10 @@
         <div class="card-body">
           <h5 class="card-title">{{ vinyl.name }}</h5>
         </div>
-        <img [src]="vinyl.coverImg" class="card-img-top vinyl-img" alt="{{ vinyl.name }} cover image">
+        <div class="vinyl-img-wrapper position-relative">
+          <img [src]="vinyl.coverImg" class=" vinyl-img" alt="{{ vinyl.name }} cover image">
+          <img src="../../../assets/vinyl-mask.png" alt="" class="vinyl-mask">
+        </div>
         <div class="card-body">
           <p class="card-text">{{ vinyl.year }}</p>
           <p class="card-text">{{ vinyl.price | currency : 'EUR' : 'symbol' }}</p>
