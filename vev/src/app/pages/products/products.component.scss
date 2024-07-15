@@ -218,3 +218,14 @@
   justify-content: space-evenly;
   margin-bottom: 2rem;
 }
+
+.btn-dropdown-custom{
+  border-color: $primary-color;
+  color: #036977;
+  border-radius: .75rem;
+}
+
+.btn-dropdown-custom:hover{
+  background-color: $primary-color;
+  color: $background-color;
+}
